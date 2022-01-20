@@ -1,6 +1,12 @@
 #include"CUMemory.cuh"
 int main()
 {
+	void* ptr = malloc(4);
+
+	int* intPtr = reinterpret_cast<int*>(ptr);
+
+	free(ptr);
+	
 	CUMemory memory(1024);
 
 	void* devicePtr0 = memory.Alloc(4);
