@@ -11,12 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CUMemory.cuh" />
-    <ClInclude Include="pch.h" />
+    <CudaCompile Include="example.cu" />
+    <CudaCompile Include="src\CUMemory.cu" />
+    <CudaCompile Include="src\CUMemoryPool.cu" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="CUMemory.cu" />
-    <CudaCompile Include="example.cu" />
+    <ClInclude Include="inc\CUMemory.cuh" />
+    <ClInclude Include="inc\CUMemoryPool.cuh" />
+    <ClInclude Include="inc\pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{60E24BE1-0AAE-4178-A2AA-207738EF0D46}</ProjectGuid>
@@ -49,6 +51,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

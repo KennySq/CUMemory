@@ -19,5 +19,9 @@ private:
 	size_t mSize;
 	size_t mOffset;
 
+	void* mHost;
+	void* mHostVirtual;
+
+
 	std::map<void*, Block> mBlocks;
 };
