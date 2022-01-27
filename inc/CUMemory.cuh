@@ -6,7 +6,6 @@ struct CUMemory
 	{
 		size_t Offset;
 		size_t Size;
-		bool bReleased;
 	};
 public:
 	CUMemory(size_t initSize);
@@ -24,4 +23,5 @@ private:
 
 
 	std::map<void*, Block> mBlocks;
+	std::map<void*, Block> mReleasedBlocks;
 };

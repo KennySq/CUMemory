@@ -35,7 +35,9 @@ void* CUMemory::Alloc(size_t size)
 
 	void* casted = reinterpret_cast<void*>(ptr);
 
-	mBlocks.insert_or_assign(casted, block);
+	mBlocks.insert(std::pair<void*, Block>(casted, block));
+	
+	cudaMemset(casted, 0xCD, size);
 
 	return casted;
 }
@@ -44,7 +46,9 @@ void CUMemory::Release(void* ptr)
 {
 	Block& block = mBlocks[ptr];
 	size_t size = block.Size;
-	block.bReleased = true;
+
+	mReleasedBlocks.insert(std::pair<void*, Block>(ptr, block));
+	mBlocks.erase(ptr);
 
 	
 	

@@ -21,6 +21,12 @@ void WriteMemory(void* vtr, _Ty data)
 
 int main()
 {
+	void* ptr = malloc(4);
+
+	int* intPtr = reinterpret_cast<int*>(ptr);
+
+	free(ptr);
+	
 	CUMemory memory(1024);
 
 	CUMemory memory2(512);
