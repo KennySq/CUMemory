@@ -1,6 +1,10 @@
 #include"CUMemory.cuh"
+#include"CUMemoryPool.cuh"
+#include"cushared_ptr.cuh"
+
 #include<iostream>
 #include<Windows.h>
+#include<memory>
 __global__ void memoryChecker()
 {
 
@@ -19,6 +23,19 @@ void WriteMemory(void* vtr, _Ty data)
 	cudaMemcpy(vtr, &data, sizeof(_Ty), cudaMemcpyHostToDevice);
 }
 
+struct Buffer
+{
+	float position[4];
+};
+
+void memoryScope()
+{
+	cushared_ptr<int> sharedSample0 = make_cushared<int>();
+	cushared_ptr<int> sharedSample1 = sharedSample0;
+
+	return;
+}
+
 int main()
 {
 	void* ptr = malloc(4);
@@ -30,7 +47,16 @@ int main()
 	CUMemory memory(1024);
 
 	CUMemory memory2(512);
-	
+	CUMemoryPool pool;
+
+	memoryScope();
+
+	std::shared_ptr<int> a = std::shared_ptr<int>();
+
+	make_cushared<int>();
+	pool.Alloc<Buffer>(1280 * 720);
+
+
 	void* devicePtr0 = memory.Alloc(4);
 	void* devicePtr1 = memory.Alloc(16);
 	void* devicePtr2 = memory.Alloc(32);

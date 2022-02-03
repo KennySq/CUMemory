@@ -14,10 +14,12 @@
     <CudaCompile Include="example.cu" />
     <CudaCompile Include="src\CUMemory.cu" />
     <CudaCompile Include="src\CUMemoryPool.cu" />
+    <CudaCompile Include="src\cushared_ptr.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\CUMemory.cuh" />
     <ClInclude Include="inc\CUMemoryPool.cuh" />
+    <ClInclude Include="inc\cushared_ptr.cuh" />
     <ClInclude Include="inc\pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
