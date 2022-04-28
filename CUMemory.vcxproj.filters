@@ -5,6 +5,10 @@
     <CudaCompile Include="src\CUMemory.cu">
       <Filter>private</Filter>
     </CudaCompile>
+    <CudaCompile Include="src\CUMemoryPool.cu">
+      <Filter>private</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src\cushared_ptr.cu" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="public">
@@ -18,16 +22,14 @@
     <ClInclude Include="inc\CUMemory.cuh">
       <Filter>public</Filter>
     </ClInclude>
+    <ClInclude Include="inc\CUMemoryPool.cuh">
+      <Filter>public</Filter>
+    </ClInclude>
     <ClInclude Include="inc\pch.h">
       <Filter>public</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\CUMemoryPool.cu">
-      <Filter>private</Filter>
-    </None>
-    <None Include="inc\CUMemoryPool.cuh">
+    <ClInclude Include="inc\cushared_ptr.cuh">
       <Filter>public</Filter>
-    </None>
+    </ClInclude>
   </ItemGroup>
 </Project>
