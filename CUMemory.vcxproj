@@ -13,11 +13,13 @@
   <ItemGroup>
     <CudaCompile Include="example.cu" />
     <CudaCompile Include="src\CUMemory.cu" />
-    <CudaCompile Include="src\CUMemoryPool.cu" />
+    <None Include="src\CUMemoryPool.cu">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\CUMemory.cuh" />
-    <ClInclude Include="inc\CUMemoryPool.cuh" />
+    <None Include="inc\CUMemoryPool.cuh" />
     <ClInclude Include="inc\pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

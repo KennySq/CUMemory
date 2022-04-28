@@ -1,22 +1,30 @@
 #include"pch.h"
 #include<vector>
+#include<unordered_map>
 
 // default 2GB
 // try extend when over use.
 
-inline unsigned long long LowerUnit(unsigned long long size)
+inline size_t LowerUnit(size_t size)
 {
 	return size << 10;
 }
 
-inline unsigned long long UpperUnit(unsigned long long size)
+inline size_t UpperUnit(size_t size)
 {
 	return size >> 10;
 }
 
+inline void* MoveOffset(void* ptr, size_t offset)
+{
+	size_t addr = reinterpret_cast<size_t>(ptr) + offset;
+
+	return reinterpret_cast<void*>(addr);
+}
+
 struct CUMemoryPool
 {
-	CUMemoryPool(unsigned long long initialSize = 0);
+	CUMemoryPool(size_t initialSize = 0);
 	~CUMemoryPool();
 
 	template<typename _Ty>
@@ -29,7 +37,6 @@ struct CUMemoryPool
 		mOffset += size;
 
 		return reinterpret_cast<void*>(ptr);
-
 	}
 	
 private:
@@ -37,20 +44,20 @@ private:
 	// 0x00000000' 00000000 ~ 0xFFFFFFFF' FFFFFFFF
 	struct Page
 	{
-		Page(unsigned long long size, void* offset)
-			: Size(size), Offset(offset)
+		Page(unsigned long long size)
+			: Size(size), Offset(mPageOffset)
 		{
-
+			mPageOffset += size;
 		}
 
 		Page()
-			: Size(-1), Offset(nullptr)
+			: Size(-1), Offset(-1)
 		{
 
 		}
 
-		unsigned long long Size;
-		void* Offset;
+		size_t Size;
+		size_t Offset;
 	};
 
 	void moveDevice(const Page& page);
@@ -65,5 +72,7 @@ private:
 	unsigned long long mVMSize;
 	const unsigned long long mPageSize;
 
-	std::vector<CUMemoryPool::Page> mPages;
+	static size_t mPageOffset;
+
+	std::unordered_map<const CUMemoryPool::Page&, size_t> mPages;
 };

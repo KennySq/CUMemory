@@ -3,7 +3,9 @@
 
 __device__ void* gGlobalMemory = nullptr;
 
-CUMemoryPool::CUMemoryPool(unsigned long long initialSize)
+size_t CUMemoryPool::mPageOffset = 0;
+
+CUMemoryPool::CUMemoryPool(size_t initialSize)
 	: mPageSize(LowerUnit(4)), mOffset(0)
 	// mPageSize == 4KB
 {
@@ -29,7 +31,7 @@ CUMemoryPool::CUMemoryPool(unsigned long long initialSize)
 	}
 
 	int pageCount = (initialSize >> 1) / mPageSize;
-	mPages.resize(pageCount);
+	//mPages.resize(pageCount);
 
 	
 
@@ -46,8 +48,9 @@ CUMemoryPool::~CUMemoryPool()
 
 void CUMemoryPool::moveDevice(const Page& page)
 {
-
+	void* ptr = MoveOffset(mVirtual, page.Offset);
 	
+	//cudaMemcpy(ptr,  )
 }
 
 void CUMemoryPool::moveHost(void* vtr, size_t size)
