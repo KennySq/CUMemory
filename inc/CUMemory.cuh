@@ -21,7 +21,6 @@ private:
 	void* mHost;
 	void* mHostVirtual;
 
-
 	std::map<void*, Block> mBlocks;
 	std::map<void*, Block> mReleasedBlocks;
 };
